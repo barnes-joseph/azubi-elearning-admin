@@ -35,7 +35,9 @@ interface TmpFormProps<T extends ZodObject<ZodRawShape>> {
   onSubmit: (data: z.infer<T>) => void;
   defaultValues?: Partial<z.infer<T>>;
   form: Array<UserFormField<T>>;
-  submitLabel?: string
+  submitLabel?: string;
+  submitting?: boolean;
+  submittingText?: string;
 }
 
 export function TmpForm<T extends ZodObject<ZodRawShape>>({
@@ -43,6 +45,8 @@ export function TmpForm<T extends ZodObject<ZodRawShape>>({
   formSchema,
   form,
   submitLabel = 'Submit',
+  submitting,
+  submittingText = 'Submitting...',
   onSubmit,
 }: TmpFormProps<T>) {
   const internalForm = useForm<z.infer<T>>({
@@ -89,7 +93,7 @@ export function TmpForm<T extends ZodObject<ZodRawShape>>({
           );
         })}
 
-        <Button className="mt-5 cursor-pointer" type="submit">{submitLabel}</Button>
+        <Button disabled={submitting} className="mt-5 cursor-pointer" type="submit">{submitting ? submittingText : submitLabel}</Button>
       </form>
     </Form>
   );
