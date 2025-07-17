@@ -1,4 +1,4 @@
-import { forgotPassword, login, registerAdmin, resetPassword, verifyEmail } from "@/services/auth-service"
+import { forgotPassword, login, registerAdmin, resendVerificationToken, resetPassword, verifyEmail } from "@/services/auth-service"
 import { useMutation } from "@tanstack/react-query"
 
 const authQueryKeys = {
@@ -6,7 +6,8 @@ const authQueryKeys = {
     registerAdmin: 'registerAdmin',
     requestPasswordReset: 'requestPasswordReset',
     resetPassword: 'resetPassword',
-    verifyEmail: 'verifyEmail'
+    verifyEmail: 'verifyEmail',
+    resendToken: 'resendToken'
 }
 
 const UseLogin = () => {
@@ -44,4 +45,11 @@ const useVerifyOTP = () => {
     })
 }
 
-export {authQueryKeys, UseLogin, UseRegisterAdmin, useRequestResetPassword, useResetPassword, useVerifyOTP}
+const useResendOTP = () => {
+    return useMutation({
+        mutationFn: resendVerificationToken,
+        mutationKey: [authQueryKeys.resendToken]
+    })
+}
+
+export {authQueryKeys, UseLogin, UseRegisterAdmin, useRequestResetPassword, useResetPassword, useVerifyOTP, useResendOTP}

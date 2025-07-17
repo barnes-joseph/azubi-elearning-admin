@@ -2,6 +2,7 @@
 
 import { TmpForm, UserFormField } from "@/components/tmpForm";
 import { useRequestResetPassword } from "@/hooks/react-query-hooks/useAuth";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { z } from "zod";
 
@@ -16,6 +17,7 @@ export default function ForgotPasswordPage() {
   const resetRequestForm: UserFormField<typeof resetRequestSchema>[] = [
     { name: "email", label: "Email", type: "email" },
   ];
+  const router = useRouter();
 
   function onSubmitResetRequest(values: z.infer<resetRequestSchemaType>) {
     console.log(values);
@@ -50,7 +52,7 @@ export default function ForgotPasswordPage() {
 
       <p className="font-inter">
         {"Back to homepage, "}{" "}
-        <button className="text-primary cursor-pointer font-medium">
+        <button onClick={()=>router.push('/auth/login')} className="text-primary cursor-pointer font-medium">
           Back
         </button>
       </p>

@@ -52,7 +52,7 @@ export default function ChangePasswordPage(){
         <p className='font-lato text-[#7F7E83] font-[18px]'>Create new password</p>
         <TmpForm submitLabel='Reset password' form={resetPasswordForm} formSchema={resetPasswordSchema} onSubmit={onResetPassword} submitting={isPending} submittingText='Resetting...'/>
 
-        <p className='font-inter'>{"Back to homepage, "} <button className='text-primary cursor-pointer font-medium'>Back</button></p>
+        <p className='font-inter'>{"Back to homepage, "} <button onClick={()=>router.push('/auth/login')} className='text-primary cursor-pointer font-medium'>Back</button></p>
 
     </div>
   )

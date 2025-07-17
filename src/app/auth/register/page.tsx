@@ -3,6 +3,7 @@
 import { TmpForm, UserFormField } from "@/components/tmpForm";
 import { UseRegisterAdmin } from "@/hooks/react-query-hooks/useAuth";
 import { AdminRegistrationInput } from "@/services/auth-service";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { z } from "zod";
 
@@ -22,6 +23,7 @@ const registerSchema = z
 type registerSchemaType = z.infer<typeof registerSchema>;
 
 export default function RegisterPage() {
+  const router = useRouter();
   const {mutate, isPending} = UseRegisterAdmin();
   const registerForm: UserFormField<typeof registerSchema>[] = [
     { name: "firstName", label: "First Name", type: "text" },
@@ -60,7 +62,7 @@ export default function RegisterPage() {
         submittingText="Creating Account..."
         submitLabel="Sign Up"
       />
-    <p className='font-inter'>{"Already have an account?"} <button className='text-primary cursor-pointer font-medium'>Login</button></p>
+    <p className='font-inter'>{"Already have an account?"} <button onClick={()=>router.push('/auth/login')} className='text-primary cursor-pointer font-medium'>Login</button></p>
 
     </div>
   );
